@@ -289,6 +289,7 @@ def handle(path: str, body: dict) -> tuple[int, dict]:
 
 class Handler(BaseHTTPRequestHandler):
     protocol_version = "HTTP/1.1"  # keep-alive: one connection for a stream of moves
+    disable_nagle_algorithm = True  # Nagle + delayed ACK add latency to every move
 
     def _json(self, code: int, obj) -> None:
         body = json.dumps(obj).encode()
